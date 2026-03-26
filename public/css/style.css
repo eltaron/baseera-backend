@@ -1,0 +1,1049 @@
+/* ================= تصميم بصيرة العصري (النسخة 2.0 المحدثة) ================= */
+
+:root {
+    /* ألوان بصيرة المعدلة لتباين أعلى وأقوى */
+    --color-navy: #092a4a; /* كحلي أغمق وأقوى */
+    --color-orange: #ff7000; /* برتقالي ساطع ومبهج */
+    --color-yellow: #ffd600; /* أصفر للإبراز */
+    --color-lightblue: #00bced; /* أزرق سماوي لللمسات الذكية */
+    --color-bg-main: #fcfcfc; /* لون خلفية غير أبيض 100% لإراحة العين */
+
+    --border-main: 3px solid var(--color-navy);
+    --shadow-main: 6px 6px 0px var(--color-navy);
+    --shadow-hover: 10px 10px 0px var(--color-navy);
+
+    --font-main: "Tajawal", sans-serif;
+    --transition-fast: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg-main);
+    color: var(--color-navy);
+    overflow-x: hidden;
+    /* خلفية منقطة ذكية وهادئة جداً */
+    background-image: radial-gradient(var(--color-navy) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+    /* نخفف حدة النقاط */
+    background-color: rgba(252, 252, 252, 0.95);
+    background-blend-mode: overlay;
+}
+
+/* ================= الطباعة والخطوط ================= */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 900 !important;
+    letter-spacing: -0.5px;
+}
+
+/* تأثير تظليل النص العصري (Marker Effect) */
+.slogan-highlight {
+    position: relative;
+    display: inline-block;
+    color: var(--color-navy);
+    z-index: 1;
+}
+.slogan-highlight::before {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: -5px;
+    right: -5px;
+    height: 40%;
+    background-color: var(--color-orange);
+    z-index: -1;
+    transform: rotate(-2deg);
+    border-radius: 4px;
+}
+
+/* ================= الأزرار العصرية ================= */
+.btn-modern {
+    font-weight: 800;
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: var(--border-main);
+    box-shadow: 4px 4px 0px var(--color-navy);
+    transition: var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+.btn-modern:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-hover);
+}
+.btn-modern:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px var(--color-navy);
+}
+
+/* ================= الأزرار الأساسية وحركاتها (CTA Buttons) ================= */
+
+/* جميع الأزرار تتشارك في هذه الحواف والحركات السلسة */
+.btn-orange,
+.btn-white,
+.btn-yellow {
+    border-radius: 12px;
+    font-weight: 700;
+    padding: 12px 28px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative; /* نحتاجه لو أضفنا أي تأثيرات لامعة داخلية لاحقاً */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --------------------------------- */
+/* 1. الزر البرتقالي (الأساسي والأهم) */
+/* --------------------------------- */
+.btn-orange {
+    background-color: var(--color-orange);
+    color: white !important;
+    border: 2px solid var(--color-orange); /* نوحد الحدود مع لون الزر في الحالة العادية */
+    box-shadow: 0 6px 15px rgba(255, 123, 0, 0.2); /* ظل برتقالي خفيف */
+}
+
+/* حالة مرور الماوس (Hover) */
+.btn-orange:hover,
+.btn-orange:focus {
+    background-color: #e66a00; /* درجة أغمق قليلاً من البرتقالي */
+    border-color: var(
+        --color-navy
+    ); /* طلبك: يظهر الإطار الكحلي عند المرور كحركة تميز */
+    color: white !important;
+    transform: translateY(-4px); /* يرتفع لأعلى للإيحاء بأنه جاهز للنقر */
+    box-shadow: 0 12px 24px rgba(255, 123, 0, 0.3); /* يكبر الظل ليزيد البروز */
+}
+
+/* حالة النقر الفعلي (Active / Click) */
+.btn-orange:active {
+    transform: translateY(2px); /* ينغمس للأسفل عند النقر */
+    box-shadow: 0 4px 10px rgba(255, 123, 0, 0.3); /* يتقلص الظل بشدة */
+    background-color: #cc5e00; /* أغمق درجة ليحاكي ضغطة الزر الفيزيائي */
+}
+
+/* --------------------------------- */
+/* 2. الزر الأبيض (الفرعي/الأنيق) */
+/* --------------------------------- */
+.btn-white {
+    background-color: white;
+    color: var(--color-navy) !important;
+    border: 2px solid transparent; /* مساحة محجوزة للبوردر حتى لا يهتز التصميم عند الـ Hover */
+    box-shadow: 0 6px 15px rgba(11, 58, 104, 0.08); /* ظل كحلي فاتح جداً */
+}
+
+/* حالة مرور الماوس (Hover) */
+.btn-white:hover,
+.btn-white:focus {
+    background-color: var(
+        --color-bg-light
+    ); /* يصبح رمادي فاتح جدا (Off-white) */
+    border-color: rgba(11, 58, 104, 0.1); /* إطار كحلي شبه شفاف */
+    color: var(--color-orange) !important; /* لفت انتباه بالنص البرتقالي */
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(11, 58, 104, 0.12);
+}
+
+/* حالة النقر الفعلي (Active / Click) */
+.btn-white:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(11, 58, 104, 0.1);
+    background-color: #e2e8f0; /* تغميق لون الزر */
+}
+
+/* --------------------------------- */
+/* 3. الزر الأصفر (المنبه/التعليمي) */
+/* يفترض أن var(--color-yellow) مُعرف لديك مسبقاً في الـ root، مثال: #FFD166 */
+/* --------------------------------- */
+.btn-yellow {
+    background-color: var(
+        --color-yellow,
+        #ffc107
+    ); /* لون بوتستراب الافتراضي كبديل لو غير معرف */
+    color: var(--color-navy) !important;
+    border: 2px solid var(--color-yellow, #ffc107);
+    box-shadow: 0 6px 15px rgba(255, 193, 7, 0.25);
+}
+
+/* حالة مرور الماوس (Hover) */
+.btn-yellow:hover,
+.btn-yellow:focus {
+    background-color: #e0a800; /* درجة مستردة أغمق قليلا */
+    border-color: #e0a800;
+    color: var(--color-navy) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(255, 193, 7, 0.35);
+}
+
+/* حالة النقر الفعلي (Active / Click) */
+.btn-yellow:active {
+    transform: translateY(2px);
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.4);
+    background-color: #c69500; /* أغمق درجة صفراء */
+}
+/* ================= 1. تخصيص الـ Scrollbar (شريط التمرير) الأنيق ================= */
+
+/* العرض الإجمالي للشريط */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* خلفية مسار الشريط */
+::-webkit-scrollbar-track {
+    background: var(--color-bg-light);
+    border-left: 1px solid rgba(11, 58, 104, 0.05); /* حد رفيع جداً للفصل */
+}
+
+/* القطعة المتحركة (Thumb) */
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-navy);
+    border-radius: 20px; /* دائري من الحواف */
+    border: 3px solid var(--color-bg-light); /* لعمل تأثير مساحة فارغة بين الشريط والمسار (Padding) */
+}
+
+/* عند الإمساك بالشريط للنزول */
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(
+        --color-orange
+    ); /* يتغير للون البرتقالي لتنبيه المستخدم بالتفاعل */
+}
+
+/* ================= الناف بار ================= */
+/* ========================================================= */
+/* ============== CSS الهيدر المودرن (Glass Header) ======== */
+/* ========================================================= */
+
+/* 1. حماية أول قسم من الاختفاء تحت الهيدر الثابت */
+body {
+    padding-top: 90px;
+}
+
+/* 2. التأثير الزجاجي العبقري (Glassmorphism) */
+.glass-header {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(15px) saturate(160%); /* يعمل تأثير زجاج مغبش ومشرّبع */
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 25px rgba(11, 58, 104, 0.06); /* ظل كحلي باهت جداً لفصله عن المحتوى */
+    padding: 12px 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 3. تأثير بسيط عند تمرير الماوس على اللوجو */
+.navbar-brand {
+    transition: transform 0.3s ease;
+}
+.navbar-brand:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* 4. روابط القائمة (انيميشن الخط السفلي المنبثق من المنتصف) */
+.navbar-nav .nav-link {
+    color: var(--color-navy) !important;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0 12px;
+    padding: 8px 0 !important;
+    position: relative; /* ضروري عشان الخط يتحرك بداخلها */
+    transition: color 0.3s ease;
+}
+
+/* تغيير لون الكلمة لبرتقالي عند الماوس */
+.navbar-nav .nav-link:hover {
+    color: var(--color-orange) !important;
+}
+
+/* إنشاء الخط السفلي (مخفي وموجود في منتصف الكلمة وعرضه 0) */
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -3px; /* تحت الكلمة مباشرة */
+    right: 50%; /* يبدأ من النص تماما */
+    transform: translateX(50%); /* لضبط نقطة الانطلاق في السنتر */
+    width: 0;
+    height: 3px;
+    background-color: var(--color-orange); /* لون الخط */
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
+}
+
+/* إظهار الخط عند مرور الماوس (يتمدد ليغطي عرض الكلمة) */
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: 100%;
+}
+
+/* 5. تصميم أزرار الـ CTA (فخمة وبلمسات خفيفة 3D) */
+.glass-header .btn-outline-navy {
+    border: 2px solid var(--color-navy);
+    color: var(--color-navy);
+    border-radius: 12px;
+    padding: 10px 24px;
+    background-color: transparent;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-header .btn-outline-navy:hover {
+    background-color: var(--color-navy);
+    color: white;
+    transform: translateY(-3px); /* يقفز لفوق بلطف */
+    box-shadow: 0 10px 20px rgba(11, 58, 104, 0.15);
+}
+
+.glass-header .btn-orange {
+    background: linear-gradient(135deg, var(--color-orange) 0%, #e66a00 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 24px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-header .btn-orange:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(255, 123, 0, 0.3);
+}
+
+/* 6. أيقونة الموبايل العبقرية (Animated Hamburger Toggle) */
+.custom-toggler {
+    border: none !important;
+    background: transparent;
+    padding: 0;
+    width: 32px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: none !important; /* إلغاء التحديد الافتراضي لبوتستراب */
+}
+
+.toggle-bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-navy);
+    border-radius: 4px;
+    transition: all 0.4s ease-in-out;
+    transform-origin: center;
+}
+
+/* الحركة عندما تُفتح قائمة الموبايل: تتحول علامة يساوي إلى حرف X برتقالي */
+.navbar-toggler[aria-expanded="true"] .toggle-bar:nth-child(1) {
+    transform: translateY(10.5px) rotate(45deg); /* ينزل الخط العلوي ويميل */
+    background-color: var(--color-orange);
+}
+
+.navbar-toggler[aria-expanded="true"] .toggle-bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(10px); /* الخط اللي في النص يتزحلق ويختفي */
+}
+
+.navbar-toggler[aria-expanded="true"] .toggle-bar:nth-child(3) {
+    transform: translateY(-10.5px) rotate(-45deg); /* يصعد الخط السفلي ويميل للعكس */
+    background-color: var(--color-orange);
+}
+
+/* 7. ترتيب القائمة البيضاء عند الفتح في الجوال (مهم جداً) */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: #ffffff; /* يجب أن تكون خلفيتها بيضاء بالكامل لأنها تغطي الشاشة */
+        border-radius: 16px;
+        padding: 25px 20px;
+        margin-top: 20px; /* فصلها عن اللوجو */
+        box-shadow: 0 20px 40px rgba(11, 58, 104, 0.15); /* ظل ضخم يرفع القائمة عن الموقع */
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar-nav .nav-link {
+        margin: 5px 0 !important;
+        padding: 12px 15px !important;
+        border-radius: 8px;
+        text-align: right; /* ضمان ترتيب النص عربي */
+    }
+
+    /* ستايل ضغطة القائمة في الجوال يختلف عن الكمبيوتر (خلفية تتظلل بدلا من خط سفلي) */
+    .navbar-nav .nav-link::after {
+        display: none;
+    } /* إخفاء الخط السفلي بتاع الديسكتوب */
+
+    .navbar-nav .nav-link:hover {
+        background-color: rgba(255, 123, 0, 0.05);
+        color: var(--color-orange) !important;
+        padding-right: 25px !important; /* النص يتزحزح يمين بخفة مريحة للعين */
+    }
+
+    .glass-header .d-flex {
+        margin-top: 15px; /* مسافة للزراير عن اللينكات في الموبايل */
+        border-top: 1px solid #f1f5f9;
+        padding-top: 20px;
+    }
+}
+
+/* ================= الهيرو (الواجهة الرئيسية) ================= */
+.hero-section {
+    padding: 80px 0 100px;
+    position: relative;
+    overflow: hidden;
+}
+.badge-ai {
+    background: var(--color-yellow);
+    border: 2px solid var(--color-navy);
+    font-weight: 800;
+    padding: 8px 20px;
+    border-radius: 50px;
+    box-shadow: 2px 2px 0px var(--color-navy);
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+/* مكان الصورة الجيف ليكون عصريا */
+.mockup-container {
+    background: white;
+    border: var(--border-main);
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: var(--shadow-hover);
+    position: relative;
+    transform: perspective(800px) rotateY(-5deg) rotateX(2deg);
+    transition: var(--transition-fast);
+}
+.mockup-container:hover {
+    transform: perspective(800px) rotateY(0deg) rotateX(0deg);
+}
+
+/* ================= بوابات النظام (الكروت المستوحاة من الأمثلة) ================= */
+#roles {
+    padding: 60px 0;
+    position: relative;
+}
+.portal-card {
+    border: var(--border-main);
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    transition: var(--transition-fast);
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+}
+.card-student {
+    background-color: var(--color-lightblue);
+    box-shadow: var(--shadow-main);
+}
+.card-parent {
+    background-color: var(--color-yellow);
+    box-shadow: var(--shadow-main);
+}
+.portal-card:hover {
+    transform: translateY(-8px) translateX(2px);
+    box-shadow: var(--shadow-hover);
+}
+.portal-card .icon-box {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 3px solid var(--color-navy);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: var(--color-navy);
+    box-shadow: 4px 4px 0 var(--color-navy);
+}
+
+/* ================= قسم رحلة الذكاء الاصطناعي ================= */
+/* ================= السكشن الداكن المتطور (مسار الرحلة) ================= */
+
+/* لون الخلفية والتدرج العميق ليعطي إحساس السيرفرات والتكنولوجيا */
+.journey-section {
+    background: linear-gradient(135deg, #051930 0%, #0a274a 100%);
+    padding: 100px 0 80px 0;
+}
+
+/* شبكة دقيقة شفافة في الخلفية مثل الـ Dark Mode الخاص بالمنصات البرمجية */
+.tech-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 40px 40px;
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px
+        );
+    z-index: 1;
+}
+
+.text-orange {
+    color: var(--color-orange) !important;
+}
+.text-light-50 {
+    color: #a9b5c3;
+}
+
+/* ======== تصميم الكروت السحرية ======== */
+.step-card {
+    background: #0f2c4f; /* كحلي أفتح درجة */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px 30px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* حركة الكارت عند مرور الماوس (يخرج للأمام مع ظل وإضاءة للحدود) */
+.step-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* تخصيص إضاءات Shadow تحت الكروت حسب دورة النظام */
+.card-step-1:hover {
+    box-shadow: 0 20px 40px rgba(255, 193, 7, 0.15);
+}
+.card-step-2:hover {
+    box-shadow: 0 20px 40px rgba(255, 123, 0, 0.15);
+}
+.card-step-3:hover {
+    box-shadow: 0 20px 40px rgba(13, 202, 240, 0.15);
+}
+
+/* خط علوي ملون لكل كارت يميز الخطوة */
+.step-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+}
+.card-step-1::before {
+    background-color: #ffc107;
+}
+.card-step-2::before {
+    background-color: var(--color-orange);
+}
+.card-step-3::before {
+    background-color: var(--color-lightblue);
+}
+
+/* ======== الدائرة المحيطة بالأيقونات ======== */
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s;
+}
+.step-card:hover .icon-circle {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* ======== الرقم العملاق (Watermark) في الخلفية ======== */
+.huge-number {
+    position: absolute;
+    top: -15px;
+    right: -10px; /* ليتماشى مع اللغة العربية RTL */
+    font-size: 8rem;
+    font-weight: 900;
+    line-height: 1;
+    color: white;
+    opacity: 0.03; /* بالكاد يظهر كالظل المائي */
+    transition: all 0.5s ease;
+    z-index: 0;
+}
+.step-card:hover .huge-number {
+    opacity: 0.08; /* يزداد الوضوح قليلا عند الماوس */
+    top: -20px;
+}
+
+/* رفع مستوى المحتوى الداخلي فوق الرقم الظل */
+.step-card h4,
+.step-card p,
+.step-card .icon-circle {
+    position: relative;
+    z-index: 2;
+}
+
+/* ======== ربط المسارات بأسهم تفاعلية في الشاشات الكبيرة ======== */
+@media (min-width: 992px) {
+    /* وضع سهم يشير من الخطوة للتي تليها (من اليمين لليسار) */
+    .step-cards-wrapper > div:not(:last-child)::after {
+        content: "\f060"; /* سهم FontAwesome يسار */
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        left: -15px; /* يقع بين العمودين */
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.15); /* لون السهم باهت جدا */
+        z-index: 0;
+    }
+}
+
+/* ================= الأسئلة الشائعة FAQ ================= */
+
+.faq-section {
+    background-color: #fafbfc; /* رمادي-مائل للأزرق خفيف جدا للراحة البصرية */
+}
+
+/* شكل بطاقة السؤال/الإجابة الكاملة */
+.faq-custom-card {
+    background: #ffffff !important; /* بيضاء نقية لتبرز من الخلفية */
+    border: 1px solid rgba(11, 58, 104, 0.05) !important;
+    border-radius: 20px !important;
+    margin-bottom: 24px !important; /* مسافة قوية بين الكروت لتعطيها فخامة وتطفو */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important; /* ظل ابتدائي ناعم */
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+/* حركة الكارت (يطفو للأعلى ويتوهج الظل قليلا عند المرور) */
+.faq-custom-card:hover {
+    box-shadow: 0 12px 30px rgba(11, 58, 104, 0.08) !important; /* ظل כحلي חفيف يربط مع الهوية */
+    transform: translateY(-3px);
+    border-color: rgba(11, 58, 104, 0.1) !important;
+}
+
+/* --- زر السؤال (الهيدر) --- */
+.faq-custom-card .accordion-button {
+    background-color: transparent !important; /* حذف أي لون باهت افتراضي للبوتستراب */
+    color: var(--color-navy) !important;
+    padding: 24px 30px;
+    box-shadow: none !important; /* مهم: حذف الـ Focus الزعج الذي يظهر بلون أزرق فاقع */
+    font-weight: 700;
+}
+
+/* في حالة السؤال مفتوح (نشط) */
+.faq-custom-card .accordion-button:not(.collapsed) {
+    color: var(--color-orange) !important;
+}
+
+/* إلغاء خط Bootstrap الافتراضي الموجود في نهاية الزر */
+.accordion-item:first-of-type .accordion-button {
+    border-radius: 20px 20px 0 0 !important;
+}
+.accordion-item:last-of-type .accordion-button.collapsed {
+    border-radius: 20px !important;
+}
+
+/* --- التخلص من أيقونة البوتستراب العادية وصناعة الأيقونة المودرن (+) / (-) --- */
+
+/* حذف الصورة الافتراضية للـ Chevron */
+.accordion-button::after {
+    background-image: none !important;
+    content: "\2b"; /* Unicode لعلامة + (Plus) */
+    font-family: "Font Awesome 6 Free"; /* لو تستخدم مكتبة أخرى مثل line-awesome يمكنك تغيير الكود */
+    font-weight: 900;
+
+    /* تصميم الأيقونة داخل دائرة مودرن */
+    width: 36px;
+    height: 36px;
+    background-color: rgba(11, 58, 104, 0.05); /* دائرة زرقاء خافتة جداً */
+    border-radius: 50%;
+    color: var(--color-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+
+    transform: none !important; /* منع الأيقونة من الدوران الافتراضي */
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    /* لمسار العربي: تظبيط الهوامش في زر البوتستراب، بما أن النسخة rtl هو موجود باليسار (auto) تلقائيا */
+}
+
+/* شكل الأيقونة عند النقر وفتح السؤال (-) باللون البرتقالي (لون الذكاء لبصيرة) */
+.accordion-button:not(.collapsed)::after {
+    content: "\f068"; /* كود علامة Minus (-) من FontAwesome */
+    background-color: var(--color-orange);
+    color: white;
+    transform: rotate(180deg) !important; /* تلف بحركة سحرية ناعمة */
+    box-shadow: 0 4px 10px rgba(255, 123, 0, 0.3); /* توهج برتقالي */
+}
+
+/* --- مكان الإجابة الداخلي (Body) --- */
+.faq-custom-card .accordion-body {
+    padding: 0px 30px 30px 30px; /* ألغينا Padding الأعلى لأن الهيدر به מסافة */
+    color: #4b5563; /* لون رمادي داكن מمتاز للقراءة بعكس الأسود الحاد */
+    line-height: 1.8; /* جعل المسافة بين الأسطر ممتازة للاستيعاب */
+    font-size: 1.05rem;
+    border-top: none !important; /* منع وجود فاصل קبيح بين السؤال والجواب */
+}
+/* ================= تواصل معنا ================= */
+/* ================= قسم التواصل الأسطوري المدمج ================= */
+
+/* --- زخارف الخلفية اللامعة (توضع خلف الكارت) --- */
+.blob-orange {
+    position: absolute;
+    top: 10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 123, 0, 0.1);
+    filter: blur(70px);
+    z-index: 1;
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+.blob-blue {
+    position: absolute;
+    bottom: -10%;
+    left: 0;
+    width: 350px;
+    height: 350px;
+    background: rgba(0, 180, 216, 0.15);
+    filter: blur(80px);
+    z-index: 1;
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* --- الحاوية الأساسية للقسمين (The Split Card) --- */
+.contact-ultra-card {
+    background-color: #fff;
+    border-radius: 32px;
+    overflow: hidden; /* أهم سطر عشان الخلفية الزرقاء ماتطلعش برا الكارت المنحني */
+    box-shadow: 0 30px 60px rgba(11, 58, 104, 0.08); /* ظل كحلي فخم وناعم جداً */
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* --- اللوحة اليمنى (الزرقاء الفخمة) --- */
+.contact-info-panel {
+    background: linear-gradient(135deg, var(--color-navy) 0%, #061a30 100%);
+    padding: 60px 50px;
+}
+
+/* الدوائر الزخرفية جوة اللوحة الزرقاء */
+.contact-info-panel .circle-decoration {
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    width: 250px;
+    height: 250px;
+    border: 30px solid rgba(255, 255, 255, 0.03);
+    border-radius: 50%;
+}
+
+.badge-glow {
+    background: rgba(255, 123, 0, 0.15);
+    color: var(--color-orange);
+    border: 1px solid rgba(255, 123, 0, 0.3);
+    font-size: 0.8rem;
+}
+
+.icon-box {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+/* حركات وسائل التواصل (انتقال سلس لليسار) */
+.contact-item {
+    padding: 10px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(-10px);
+}
+
+/* ترتيب الأرقام الانجليزية بشكل صحيح لليسار بالرغم من أن الصفحة بالعربي */
+.dir-ltr {
+    direction: ltr;
+    display: inline-block;
+}
+
+/* --- اللوحة اليسرى (الفورمة البيضاء المنعشة) --- */
+.contact-form-panel {
+    padding: 60px 50px;
+}
+
+/* تغليف الحقول لإضافة أيقونة بداخلها */
+.modern-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.modern-input-group .icon {
+    position: absolute;
+    right: 20px;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    z-index: 5;
+}
+
+/* تصميم حقل الإدخال ليكون כמו برامج الآيفون والويب الحديث */
+.modern-input {
+    width: 100%;
+    padding: 16px 20px 16px 50px; /* الـ 50 يمين لترك مكان للأيقونة (RTL) */
+    background-color: #f8fafc;
+    border: 2px solid #f1f5f9;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-navy);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+.modern-input::placeholder {
+    color: #a0aec0;
+    font-weight: 400;
+}
+
+/* السحر الحقيقي عند التركيز داخل الحقل */
+.modern-input:focus {
+    background-color: #ffffff;
+    border-color: var(--color-orange);
+    box-shadow: 0 0 0 5px rgba(255, 123, 0, 0.15); /* إضاءة برتقالية خارجية ناعمة */
+    outline: none;
+}
+/* تلوين الأيقونة عند التحديد */
+.modern-input:focus ~ .icon,
+.modern-input-group:focus-within .icon {
+    color: var(--color-orange) !important;
+}
+
+/* --- تصميم خيارات الـ Radio (تحديد المستخدم) كأنها أزرار حقيقية --- */
+.user-type-radios label {
+    cursor: pointer;
+}
+.custom-radio input {
+    display: none;
+}
+.custom-radio .radio-btn {
+    display: block;
+    padding: 10px 20px;
+    background-color: #f8fafc;
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #64748b;
+    transition: 0.2s;
+}
+.custom-radio input:checked + .radio-btn {
+    background-color: var(--color-navy);
+    border-color: var(--color-navy);
+    color: white;
+    box-shadow: 0 5px 15px rgba(11, 58, 104, 0.2);
+}
+
+/* --- زر الإرسال المودرن القوي --- */
+.btn-submit-modern {
+    background-color: var(--color-orange);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 16px 30px;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 10px 20px rgba(255, 123, 0, 0.25);
+    transition: all 0.3s ease;
+}
+.btn-submit-modern:hover {
+    background-color: #e66b00;
+    transform: translateY(-3px); /* الزر يرتفع لأعلى للإيحاء بالإرسال */
+    box-shadow: 0 15px 25px rgba(255, 123, 0, 0.35);
+    color: white;
+}
+
+/* تنسيقات الموبايل لمنع الحواف الشاذة في الشاشات الصغيرة */
+@media (max-width: 991px) {
+    .contact-info-panel,
+    .contact-form-panel {
+        padding: 40px 30px;
+    }
+}
+/* ================= الفوتر ================= */
+/* ================= تصميم الفوتر الساحر ================= */
+
+.modern-footer {
+    background-color: #021124; /* لون ليلي داكن جداً يليق بالتكنولوجيا (Darker than Navy) */
+    position: relative;
+    overflow: hidden;
+    color: #cbd5e1;
+}
+
+/* --- الخط المضيء الذي يربط الفوتر بالصفحة أعلى الفوتر --- */
+.footer-top-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--color-lightblue) 0%,
+        var(--color-orange) 50%,
+        var(--color-navy) 100%
+    );
+    box-shadow: 0 2px 20px rgba(255, 123, 0, 0.4); /* شعاع برتقالي خفيف */
+    z-index: 10;
+}
+
+/* زخرفة خفية في أرضية الفوتر */
+.footer-bg-pattern {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    background-image: radial-gradient(
+        circle at 100% 100%,
+        rgba(11, 58, 104, 0.4) 0%,
+        transparent 50%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- اللوجو واسم بصيرة في الفوتر --- */
+.logo-text {
+    color: white;
+    letter-spacing: -1px;
+}
+.logo-icon-wrap {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--color-orange), #d96200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 15px rgba(255, 123, 0, 0.3);
+}
+
+/* بادات التقنيات التي تظهر كفاءة المشروع (ميزة جبارة للمناقشين) */
+.badge-tech {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.letter-spacing-custom {
+    letter-spacing: 0px;
+    font-size: 1.1rem;
+}
+
+/* --- حركة روابط القائمة الجانبية (Magic Hover) --- */
+.footer-links-list li {
+    margin-bottom: 15px;
+    position: relative;
+}
+.footer-link {
+    color: #94a3b8 !important;
+    text-decoration: none !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+/* السهم الصغير الذي يظهر عندما تضع الماوس */
+.footer-link::before {
+    content: "\f104"; /* سهم يسار RTL */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: -20px;
+    color: var(--color-orange);
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-link:hover {
+    color: white !important;
+    transform: translateX(-22px); /* دفع النص لليسار */
+}
+.footer-link:hover::before {
+    opacity: 1;
+    transform: translateX(0); /* دخول السهم للبروز */
+}
+
+/* استثناء خاص بجدول البوابات (لا نريد السهم ان يدفع الأيقونات) */
+.portals-list .footer-link:hover {
+    transform: translateX(-5px);
+    color: var(--color-orange) !important;
+}
+.portals-list .footer-link::before {
+    display: none;
+}
+
+/* --- السوشيال ميديا الدائرية الحديثة --- */
+.footer-bottom-bar {
+    border-top-color: rgba(255, 255, 255, 0.08) !important;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-icons a:hover {
+    background-color: var(--color-lightblue); /* يضيء بالأزرق التقني */
+    color: #021124;
+    border-color: transparent;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 180, 216, 0.4);
+}

@@ -1,0 +1,202 @@
+/* --- الأساسيات (نفس هوية غرفة المشاهدة) --- */
+:root {
+    --side-bg: #030a13;
+    --main-bg: #0b1e33;
+    --navy: #0b3a68;
+    --orange: #ff7b00;
+    --lightblue: #00b4d8;
+}
+
+body.student-body {
+    font-family: "Tajawal", sans-serif;
+    background-color: var(--main-bg);
+    margin: 0;
+    overflow: hidden;
+    color: white;
+}
+
+/* ================= كود واجهة التحدي المنبثقة (Quiz Overlay) ================= */
+
+/* الخلفية المضببة التي تغطي غرفة المشاهدة */
+.quiz-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 10, 19, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* كارت السؤال السحري */
+.quiz-card {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    color: var(--navy);
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* مؤشر الوقت المرئي (Visual Timer) - مهم للتحليل السلوكي */
+.quiz-timer-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: #f1f5f9;
+}
+.timer-progress {
+    height: 100%;
+    width: 100%;
+    background: var(--orange);
+    transition: width 10s linear; /* يقل في 10 ثوان مثلا */
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.question-number {
+    background: #f1f5f9;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.8rem;
+}
+
+.question-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* خيارات الإجابة (Pills) */
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.option-btn {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 18px 25px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: right;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.option-btn:hover {
+    border-color: var(--lightblue);
+    background: #f0f9ff;
+    transform: translateX(-5px);
+}
+.option-btn i {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+/* حالة الإجابة الصحيحة/الخاطئة */
+.option-btn.correct {
+    background: #ecfdf5;
+    border-color: #10b981;
+    color: #065f46;
+}
+.option-btn.wrong {
+    background: #fef2f2;
+    border-color: #ef4444;
+    color: #991b1b;
+}
+
+/* شاشة النتيجة (تظهر بعد الإجابة) */
+.result-screen {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+}
+.result-icon {
+    font-size: 5rem;
+    color: #fbbf24;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite;
+}
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.btn-continue {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 20px;
+    font-weight: 800;
+    margin-top: 25px;
+    transition: 0.3s;
+}
+.btn-continue:hover {
+    background: var(--orange);
+    transform: scale(1.05);
+}
+/* إضافة ستايل سريع لشاشة الوقت الضائع */
+.timeout-screen {
+    text-align: center;
+    display: none;
+    padding: 20px 0;
+}
+.timeout-icon {
+    font-size: 5rem;
+    color: var(--orange);
+    margin-bottom: 20px;
+    animation: shake 0.5s infinite;
+}
+@keyframes shake {
+    0%,
+    100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(5deg);
+    }
+    75% {
+        transform: rotate(-5deg);
+    }
+}
+.timer-text {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-right: 10px;
+}

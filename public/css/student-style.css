@@ -1,0 +1,1031 @@
+/* --- الألوان والمتغيرات --- */
+:root {
+    --side-bg: #030a13; /* خلفية داكنة جدا للسايد بار */
+    --main-bg: #f8fafc;
+    --navy: #0b3a68;
+    --orange: #ff7b00;
+    --lightblue: #00b4d8;
+    --text-muted: #94a3b8;
+    --sidebar-text: #cbd5e1;
+}
+
+body.student-body {
+    font-family: "Tajawal", sans-serif;
+    background-color: var(--main-bg);
+    margin: 0;
+}
+
+.text-orange {
+    color: var(--orange) !important;
+}
+
+/* --- تصميم الـ Layout العام --- */
+.student-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- القائمة الجانبية (Sidebar) --- */
+.sidebar {
+    width: 280px;
+    background-color: var(--side-bg);
+    color: white;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-box {
+    width: 32px;
+    height: 32px;
+    background: var(--navy);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--lightblue);
+}
+
+.brand-name {
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.notification-bell {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
+/* --- مربع البحث بستايل ACME --- */
+.sidebar-search .search-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.search-wrapper input {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.search-k {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* --- روابط القائمة (Navigation) --- */
+.nav-list {
+    list-style: none;
+    padding: 0;
+}
+.nav-item {
+    margin-bottom: 8px;
+}
+
+.nav-item a,
+.nav-link-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-item.active a {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+/* --- القائمة الشجرية (Submenu Tree) مثل الصورة --- */
+.submenu {
+    list-style: none;
+    padding-right: 25px; /* المسافة للمسار الشجري */
+    margin-top: 5px;
+    position: relative;
+}
+
+/* الخط العمودي الشجري */
+.submenu::before {
+    content: "";
+    position: absolute;
+    right: 12px;
+    top: 0;
+    bottom: 15px;
+    width: 1.5px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.submenu-item {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+/* الخطوط الأفقية الخارجة من العمود */
+.submenu-item::before {
+    content: "";
+    position: absolute;
+    right: -13px;
+    top: 20px;
+    width: 10px;
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.submenu-item a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submenu-item.active-sub a {
+    color: white;
+}
+
+.badge-count {
+    background: #10b981; /* اللون الأخضر من الصورة */
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+/* --- المحتوى الرئيسي (Main Content) --- */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.content-header h1 {
+    font-weight: 900;
+}
+
+/* --- كروت المواد (Subject Cards) --- */
+.subject-card {
+    background: white;
+    border-radius: 24px;
+    padding: 35px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    transition: 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--navy);
+}
+
+.subject-card h3 {
+    font-weight: 800;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.progress-info {
+    text-align: right;
+    margin-bottom: 25px;
+}
+.progress-info span {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+.progress {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+.progress-bar {
+    background: var(--navy);
+    border-radius: 10px;
+}
+
+/* زر المسار */
+.btn-path {
+    background: #f1f5f9;
+    color: var(--navy);
+    border: none;
+    font-weight: 800;
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+.btn-path:hover {
+    background: var(--navy);
+    color: white;
+}
+
+/* ستايل الكارت المقترح من AI */
+.active-suggested {
+    border: 2.5px solid var(--orange);
+}
+
+.ai-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--orange);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.btn-path-orange {
+    background: var(--orange);
+    color: white;
+    border: none;
+    font-weight: 800;
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(255, 123, 0, 0.2);
+}
+
+/* صندوق نصيحة بصيرة */
+.ai-tip-box {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border: 1px dashed var(--lightblue);
+}
+
+.tip-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 180, 216, 0.1);
+    color: var(--lightblue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+/* تظبيط الفوتر في السايدبار */
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.user-card img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.user-info h6 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+.user-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+/* ================= Responsive & Toggle Adjustments ================= */
+
+/* --- زر الموبايل العلوي --- */
+.mobile-top-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 70px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.toggle-sidebar-btn {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+}
+
+.mobile-logo {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--navy);
+}
+
+.close-sidebar-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+}
+
+/* --- طبقة التغطية (Overlay) --- */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+    backdrop-filter: blur(4px);
+}
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* --- تعديلات الشاشات الكبيرة والصغيرة --- */
+
+@media (max-width: 991px) {
+    .sidebar {
+        position: fixed;
+        right: -300px; /* مخفي خارج الشاشة من اليمين (RTL) */
+        top: 0;
+        bottom: 0;
+        z-index: 1050;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar.active {
+        right: 0; /* يظهر عند التفعيل */
+    }
+
+    .main-content {
+        padding: 100px 20px 40px 20px; /* مساحة علوية عشان الـ Mobile Bar */
+        width: 100%;
+    }
+
+    .content-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .ai-tip-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    .sidebar {
+        min-width: 280px;
+        position: sticky;
+    }
+}
+
+/* تحسين شكل الكروت في الشاشات الصغيرة جداً */
+@media (max-width: 576px) {
+    .subject-card {
+        padding: 25px 15px;
+    }
+    .card-icon {
+        font-size: 2.5rem;
+    }
+    .subject-card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* ================= كود خريطة التعلم الذكية (Pathway) ================= */
+
+.pathway-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding: 40px 0;
+}
+
+/* الخط العمودي الذي يربط الدروس (الطريق) */
+.pathway-line {
+    position: absolute;
+    right: 50%;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: #e2e8f0;
+    transform: translateX(50%);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.lesson-step {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* شكل نقطة الدرس */
+.lesson-node {
+    width: 100px;
+    height: 100px;
+    background: white;
+    border-radius: 50%;
+    border: 6px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--text-muted);
+    position: relative;
+    transition: 0.4s;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.lesson-info {
+    position: absolute;
+    width: 250px;
+    text-align: right;
+}
+
+/* ترتيب الدروس (واحد يمين وواحد يسار) */
+.lesson-step:nth-child(even) .lesson-info {
+    right: 130px;
+}
+.lesson-step:nth-child(odd) .lesson-info {
+    left: 60px;
+}
+
+.lesson-info h5 {
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 5px;
+}
+.lesson-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* --- حالة الدرس المكتمل (Completed) --- */
+.step-done .lesson-node {
+    background: #10b981;
+    border-color: #059669;
+    color: white;
+}
+.step-done .lesson-node::after {
+    content: "\f005";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    background: #fbbf24;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+/* --- حالة الدرس المقترح (AI Recommended) - التوهج --- */
+.step-recommended .lesson-node {
+    border-color: var(--orange);
+    color: var(--orange);
+    animation: pulse-orange 2s infinite;
+}
+
+.ai-label {
+    position: absolute;
+    top: -35px;
+    background: var(--orange);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+@keyframes pulse-orange {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 123, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(255, 123, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 123, 0, 0);
+    }
+}
+
+/* --- حالة الدرس المقفل (Locked) --- */
+.step-locked .lesson-node {
+    background: #f1f5f9;
+    opacity: 0.6;
+}
+
+/* --- قسم المراجعة (AI Review Section) --- */
+.review-card {
+    background: #fff;
+    border-radius: 20px;
+    border: 2px solid #fee2e2;
+    padding: 25px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.review-icon {
+    width: 50px;
+    height: 50px;
+    background: #fee2e2;
+    color: #ef4444;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* موبايل ريسبونسيف */
+@media (max-width: 991px) {
+    .lesson-info {
+        width: 150px;
+        font-size: 0.8rem;
+    }
+    .step-done .lesson-node::after {
+        width: 20px;
+        height: 20px;
+        font-size: 0.6rem;
+    }
+    .lesson-node {
+        width: 60px;
+        height: 60px;
+    }
+
+    .lesson-step:nth-child(even) .lesson-info {
+        right: -4px;
+    }
+    .lesson-step:nth-child(odd) .lesson-info {
+        left: -22px;
+    }
+}
+/* ================= إضافات صفحة الإنجازات ================= */
+
+/* كروت الإحصائيات (Stat Cards) */
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+.bg-orange-light {
+    background: rgba(255, 123, 0, 0.1);
+}
+.bg-blue-light {
+    background: rgba(0, 180, 216, 0.1);
+}
+.bg-green-light {
+    background: rgba(16, 185, 129, 0.1);
+}
+.stat-info h3 {
+    font-weight: 900;
+    margin: 0;
+    color: var(--navy);
+}
+.stat-info p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* تصميم الأوسمة (Badges) */
+.badge-item {
+    background: white;
+    border-radius: 24px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+    height: 100%;
+}
+.badge-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    background: #f8fafc;
+    color: #cbd5e1;
+}
+.badge-item h6 {
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+}
+.badge-item p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* الأوسمة المفتوحة */
+.unlocked .badge-icon {
+    background: var(--navy);
+    color: var(--lightblue);
+    box-shadow: 0 10px 20px rgba(11, 58, 104, 0.2);
+}
+.unlocked:hover {
+    transform: translateY(-5px);
+    border-color: var(--lightblue);
+}
+
+/* الوسام الأسطوري (Glow effect) */
+.legendary {
+    border: 2px solid #fbbf24;
+    background: linear-gradient(to bottom, #fff, #fffbeb);
+}
+.legendary .badge-icon {
+    background: #fbbf24;
+    color: white;
+    animation: pulse-gold 2s infinite;
+}
+@keyframes pulse-gold {
+    0% {
+        box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(251, 191, 36, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+    }
+}
+
+/* الأوسمة المغلقة (Grayscale) */
+.locked {
+    opacity: 0.6;
+}
+.locked .badge-icon i {
+    filter: grayscale(1);
+}
+
+/* لوحة المتصدرين (Leaderboard) */
+.leaderboard-card {
+    background: white;
+    border-radius: 24px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+.rank-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 16px;
+    margin-bottom: 5px;
+    gap: 12px;
+}
+.rank-num {
+    width: 30px;
+    font-weight: 900;
+    color: var(--text-muted);
+}
+.rank-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+}
+.rank-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-grow: 1;
+}
+.rank-points {
+    font-weight: 800;
+    color: var(--navy);
+    font-size: 0.85rem;
+}
+
+/* تمييز المراكز الثلاثة الأولى */
+.first {
+    background: #fffbeb;
+}
+.first .rank-num {
+    color: #fbbf24;
+}
+.second {
+    background: #f8fafc;
+}
+.second .rank-num {
+    color: #94a3b8;
+}
+.active-me {
+    background: var(--navy);
+    color: white;
+}
+.active-me .rank-points,
+.active-me .rank-num {
+    color: var(--lightblue);
+}
+/* ================= إضافات صفحة الملف الشخصي والإعدادات ================= */
+
+/* هيدر البروفايل */
+.profile-header-card {
+    background: var(--navy);
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.profile-cover {
+    height: 120px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--lightblue) 100%);
+    opacity: 0.6;
+}
+.profile-info-wrap {
+    padding: 0 40px 40px 40px;
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    margin-top: -60px;
+    position: relative;
+    z-index: 5;
+}
+.profile-avatar-edit {
+    position: relative;
+    width: 140px;
+    height: 140px;
+}
+.profile-avatar-edit img {
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    border: 6px solid #fff;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.edit-icon {
+    position: absolute;
+    bottom: -5px;
+    left: -5px;
+    width: 45px;
+    height: 45px;
+    background: var(--orange);
+    color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.edit-icon:hover {
+    transform: scale(1.1);
+    background: var(--navy);
+}
+.profile-text {
+    color: #fff;
+    padding-bottom: 10px;
+}
+
+/* بطاقة الإعدادات */
+.settings-card {
+    background: #fff;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* الحقول المودرن داخل الإعدادات */
+.input-group-modern {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.input-group-modern i {
+    position: absolute;
+    right: 18px;
+    color: #94a3b8;
+    font-size: 1.1rem;
+}
+.form-control-modern {
+    width: 100%;
+    padding: 14px 50px 14px 20px;
+    background: #f8fafc;
+    border: 2px solid #f1f5f9;
+    border-radius: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    transition: 0.3s;
+}
+.form-control-modern:focus {
+    border-color: var(--lightblue);
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 5px rgba(0, 180, 216, 0.1);
+}
+
+/* بطاقة الهوية التعليمية (AI Card) */
+.ai-identity-card {
+    background: #021124;
+    border-radius: 30px;
+    padding: 35px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+.card-glow {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(
+        circle,
+        rgba(0, 180, 216, 0.2) 0%,
+        transparent 70%
+    );
+}
+.identity-badge {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.id-icon {
+    font-size: 2rem;
+    color: var(--lightblue);
+}
+.id-text h6 {
+    margin: 0;
+    font-weight: 800;
+    color: #fff;
+}
+.id-text p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.id-stat-item {
+    margin-bottom: 20px;
+}
+.id-stat-item span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #94a3b8;
+    display: block;
+    margin-bottom: 8px;
+}
+.id-progress {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.id-fill {
+    height: 100%;
+    background: var(--lightblue);
+    border-radius: 10px;
+}
+
+.ai-comment {
+    background: rgba(255, 123, 0, 0.1);
+    border: 1px solid rgba(255, 123, 0, 0.2);
+    color: #fff;
+}
+
+@media (max-width: 991px) {
+    .profile-info-wrap {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: -80px;
+    }
+    .profile-avatar-edit {
+        margin-bottom: 10px;
+    }
+    .settings-card {
+        padding: 30px 20px;
+    }
+}
+
+/* جميع الأزرار تتشارك في هذه الحواف والحركات السلسة */
+.btn-orange,
+.btn-white,
+.btn-yellow {
+    border-radius: 12px;
+    font-weight: 700;
+    padding: 12px 28px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative; /* نحتاجه لو أضفنا أي تأثيرات لامعة داخلية لاحقاً */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --------------------------------- */
+/* 1. الزر البرتقالي (الأساسي والأهم) */
+/* --------------------------------- */
+.btn-orange {
+    background-color: #e66a00;
+    color: white !important;
+    border: 2px solid #e66a00; /* نوحد الحدود مع لون الزر في الحالة العادية */
+    box-shadow: 0 6px 15px rgba(255, 123, 0, 0.2); /* ظل برتقالي خفيف */
+}
+
+/* حالة مرور الماوس (Hover) */
+.btn-orange:hover,
+.btn-orange:focus {
+    background-color: #e66a00; /* درجة أغمق قليلاً من البرتقالي */
+    border-color: var(
+        --color-navy
+    ); /* طلبك: يظهر الإطار الكحلي عند المرور كحركة تميز */
+    color: white !important;
+    transform: translateY(-4px); /* يرتفع لأعلى للإيحاء بأنه جاهز للنقر */
+    box-shadow: 0 12px 24px rgba(255, 123, 0, 0.3); /* يكبر الظل ليزيد البروز */
+}

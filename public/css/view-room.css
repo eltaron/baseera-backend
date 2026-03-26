@@ -1,0 +1,280 @@
+:root {
+    --side-bg: #030a13;
+    --main-bg: #0b1e33; /* خلفية داكنة جدا للتركيز */
+    --navy: #0b3a68;
+    --orange: #ff7b00;
+    --lightblue: #00b4d8;
+    --sidebar-text: #cbd5e1;
+    --sidebar-width: 280px;
+}
+
+body.student-body {
+    font-family: "Tajawal", sans-serif;
+    background-color: var(--main-bg);
+    margin: 0;
+    /* overflow: hidden; */
+    color: white;
+}
+.student-layout {
+    display: flex;
+    /* height: 100vh; */
+}
+
+/* السايدبار (مصغر في هذه الصفحة لزيادة مساحة الفيديو) */
+.sidebar {
+    width: 80px;
+    background-color: var(--side-bg);
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s;
+}
+.sidebar:hover {
+    width: 250px;
+} /* يتوسع عند الوقوف عليه */
+.sidebar .nav-item a {
+    color: var(--sidebar-text);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.sidebar:hover .nav-item span {
+    display: inline;
+}
+.sidebar .nav-item span {
+    display: none;
+}
+
+/* ================= كود غرفة المشاهدة الذكية ================= */
+
+.main-workspace {
+    flex-grow: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: radial-gradient(circle at center, #162d4a 0%, #0b1e33 100%);
+}
+
+.lesson-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ai-status-badge {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid #10b981;
+    color: #10b981;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+.ai-status-badge i {
+    animation: pulse-green 1.5s infinite;
+    margin-left: 5px;
+}
+
+/* حاوية الفيديو ومراقب الذكاء الاصطناعي */
+.smart-viewer-container {
+    display: flex;
+    gap: 25px;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+/* --- مشغل الفيديو --- */
+.video-player-wrapper {
+    flex: 3;
+    background: #000;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+}
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url("https://img.freepik.com/free-vector/math-concept-illustration_114360-3914.jpg")
+        center/cover;
+    filter: brightness(0.5);
+}
+.play-btn-big {
+    position: absolute;
+    font-size: 5rem;
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.play-btn-big:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    color: var(--orange);
+}
+
+/* --- لوحة مراقبة الذكاء الاصطناعي (AI Monitor) --- */
+.ai-monitor-panel {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.camera-preview {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #030a13;
+    border-radius: 15px;
+    position: relative;
+    border: 2px solid var(--lightblue);
+}
+.camera-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 180, 216, 0.1);
+}
+.scanning-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--lightblue);
+    box-shadow: 0 0 15px var(--lightblue);
+    animation: scan 3s linear infinite;
+}
+
+.ai-metric {
+    margin-bottom: 15px;
+}
+.metric-label {
+    font-size: 0.8rem;
+    color: var(--sidebar-text);
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.metric-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.metric-fill {
+    height: 100%;
+    background: var(--lightblue);
+    border-radius: 10px;
+    transition: 1s;
+}
+
+/* زر "أنهيت الدرس" */
+.finish-lesson-btn {
+    background: var(--orange);
+    border: none;
+    color: white;
+    padding: 18px;
+    border-radius: 18px;
+    font-weight: 900;
+    font-size: 1.2rem;
+    box-shadow: 0 10px 20px rgba(255, 123, 0, 0.3);
+    transition: 0.3s;
+}
+.finish-lesson-btn:hover {
+    transform: translateY(-5px);
+    background: #e66b00;
+}
+
+/* Animations */
+@keyframes pulse-green {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes scan {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: 100%;
+    }
+}
+
+/* للموبايل */
+@media (max-width: 991px) {
+    .smart-viewer-container {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .sidebar {
+        display: none;
+    }
+    .video-player-wrapper {
+        min-height: 250px;
+        flex: none;
+    }
+    .ai-monitor-panel {
+        flex: none;
+    }
+}
+/* ================= الهيدر العلوي الجديد ================= */
+.top-view-header {
+    height: 70px;
+    background-color: var(--side-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.back-link {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    color: var(--orange);
+    transform: translateX(-5px); /* حركة لليمين بسيطة عند الماوس */
+}
+
+.brand-minimal {
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.user-minimal img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+}
