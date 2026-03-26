@@ -115,8 +115,8 @@
 ### 1. تحميل المشروع
 
 ```bash
-git clone https://github.com/your-username/baseera.git
-cd baseera
+git clone https://github.com/eltaron/baseera-backend.git
+cd baseera-backend
 ```
 
 ### 2. تثبيت الحزم
@@ -171,18 +171,10 @@ php artisan serve
 
 ```
 screenshots/
-├── landing.png
-├── student-dashboard.png
-├── admin-panel.png
+├── screenshots/landing.png
+├── screenshots/student-dashboard.png
+├── screenshots/admin-panel.png
 ```
-
-ثم استخدامها هكذا:
-
-```markdown
-![Landing](screenshots/landing.png)
-```
-
----
 
 ## 👨‍💻 الفريق المطور
 
