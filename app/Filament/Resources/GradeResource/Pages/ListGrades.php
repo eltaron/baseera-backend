@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\GradeResource\Pages;
 
 use App\Filament\Resources\GradeResource;
+use App\Filament\Widgets\GradeStats;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,12 @@ class ListGrades extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            GradeStats::class,
         ];
     }
 }

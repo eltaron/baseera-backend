@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     use HasFactory;
-    protected $fillable = ['unit_id', 'title'];
+    protected $fillable = ['unit_id', 'title', 'teacher_id'];
     public function video()
     {
         return $this->hasOne(Video::class);
@@ -16,5 +16,9 @@ class Lesson extends Model
     public function unit()
     {
         return $this->belongsTo(Unit::class);
+    }
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
     }
 }

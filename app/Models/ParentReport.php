@@ -9,4 +9,8 @@ class ParentReport extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'summary_text', 'status_color', 'report_date'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -4,26 +4,35 @@ namespace App\Filament\Widgets;
 
 use App\Models\VideoInteraction;
 use Filament\Widgets\ChartWidget;
-use Flowframe\Trend\Trend;
-use Flowframe\Trend\TrendValue;
+use Illuminate\Support\Facades\DB;
 
 class InteractionsChart extends ChartWidget
 {
-    protected static ?string $heading = 'معدل التفاعل الشهري';
+    protected static ?string $heading = 'معدل التفاعل مع المحتوى';
     protected static ?string $maxHeight = '300px';
-    protected int | string | array $columnSpan = 'full'; // جعل الجدول يأخذ عرض الصفحة كاملاً
+    protected int | string | array $columnSpan = 'full';
 
     protected function getData(): array
     {
-        // محاكاة بيانات حقيقية: نجمع عدد التفاعلات لكل شهر في السنة الحالية
-        $data = VideoInteraction::selectRaw('COUNT(*) as count, MONTH(created_at) as month')
+        $teacherId = auth()->id();
+        $isTeacher = auth()->user()->hasRole('Teacher');
+
+        // جلب البيانات مع الفلترة حسب الرتبة
+        $query = VideoInteraction::query()
+            ->when($isTeacher, function ($q) use ($teacherId) {
+                return $q->whereHas('video', fn($v) => $v->where('teacher_id', $teacherId));
+            });
+
+        $data = $query->select(
+            DB::raw('COUNT(*) as count'),
+            DB::raw('MONTH(created_at) as month')
+        )
             ->whereYear('created_at', date('Y'))
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('count', 'month')
             ->toArray();
 
-        // تجهيز مصفوفة لـ 12 شهر لضمان ظهور الرسم كاملاً
         $values = [];
         $months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
 
@@ -34,11 +43,12 @@ class InteractionsChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'فيديوهات مشاهَدة',
+                    'label' => $isTeacher ? 'مشاهدات فيديوهاتك' : 'مشاهدات المنصة بالكامل',
                     'data' => $values,
+                    'borderColor' => $isTeacher ? '#00B4D8' : '#FF7B00', // لون أزرق للمعلم، برتقالي للأدمن
+                    'backgroundColor' => $isTeacher ? 'rgba(0, 180, 216, 0.1)' : 'rgba(255, 123, 0, 0.1)',
                     'fill' => 'start',
-                    'borderColor' => 'rgb(255, 123, 0)', // لون بصيرة البرتقالي
-                    'backgroundColor' => 'rgba(255, 123, 0, 0.1)',
+                    'tension' => 0.4,
                 ],
             ],
             'labels' => $months,
@@ -47,6 +57,6 @@ class InteractionsChart extends ChartWidget
 
     protected function getType(): string
     {
-        return 'line'; // نوع الرسم بياني خطي
+        return 'line';
     }
 }

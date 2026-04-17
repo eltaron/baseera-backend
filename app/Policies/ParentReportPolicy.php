@@ -15,7 +15,7 @@ class ParentReportPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_parent::report');
+        return $user->can('view_any_student::reports');
     }
 
     /**
@@ -23,7 +23,7 @@ class ParentReportPolicy
      */
     public function view(User $user, ParentReport $parentReport): bool
     {
-        return $user->can('view_parent::report');
+        return $user->can('view_student::reports');
     }
 
     /**
@@ -31,7 +31,7 @@ class ParentReportPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_parent::report');
+        return $user->can('{{ Create }}');
     }
 
     /**
@@ -39,7 +39,7 @@ class ParentReportPolicy
      */
     public function update(User $user, ParentReport $parentReport): bool
     {
-        return $user->can('update_parent::report');
+        return $user->can('{{ Update }}');
     }
 
     /**
@@ -47,7 +47,7 @@ class ParentReportPolicy
      */
     public function delete(User $user, ParentReport $parentReport): bool
     {
-        return $user->can('delete_parent::report');
+        return $user->can('{{ Delete }}');
     }
 
     /**
@@ -55,7 +55,7 @@ class ParentReportPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_parent::report');
+        return $user->can('{{ DeleteAny }}');
     }
 
     /**
@@ -63,7 +63,7 @@ class ParentReportPolicy
      */
     public function forceDelete(User $user, ParentReport $parentReport): bool
     {
-        return $user->can('force_delete_parent::report');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,7 +71,7 @@ class ParentReportPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_parent::report');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -79,7 +79,7 @@ class ParentReportPolicy
      */
     public function restore(User $user, ParentReport $parentReport): bool
     {
-        return $user->can('restore_parent::report');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class ParentReportPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_parent::report');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class ParentReportPolicy
      */
     public function replicate(User $user, ParentReport $parentReport): bool
     {
-        return $user->can('replicate_parent::report');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class ParentReportPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_parent::report');
+        return $user->can('{{ Reorder }}');
     }
 }

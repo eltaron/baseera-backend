@@ -13,4 +13,9 @@ class StudentProgress extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

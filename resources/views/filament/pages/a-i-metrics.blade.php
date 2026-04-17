@@ -1,62 +1,121 @@
 <x-filament-panels::page>
-    <!-- القسم العلوي: حالة النظام الذكي (Custom Header) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div
-            class="p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center space-x-4 space-x-reverse">
-            <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg">
-                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04M12 21.48V11.5">
-                    </path>
-                </svg>
-            </div>
+    <style>
+        .ai-terminal {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            height: 150px;
+            overflow-y: auto;
+            color: #3fb950;
+            font-size: 13px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .ai-terminal::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .ai-terminal::-webkit-scrollbar-thumb {
+            background: #3fb950;
+            border-radius: 10px;
+        }
+
+        .pulse-red {
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <!-- 1. ترويسة حالة السيرفرات المتطورة -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+            <div class="w-2 h-10 bg-green-500 rounded-full shadow-[0_0_10px_#10b981]"></div>
             <div>
-                <p class="text-sm font-medium text-gray-500">حالة نموذج الكاميرا</p>
-                <h4 class="text-xl font-bold text-gray-900 dark:text-white">يعمل بامتياز</h4>
+                <p class="text-xs text-gray-500 uppercase font-bold">Emotion Engine</p>
+                <h4 class="font-bold text-gray-800 dark:text-white text-sm">متصل (Online)</h4>
             </div>
         </div>
-
-        <div
-            class="p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center space-x-4 space-x-reverse">
-            <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
-            </div>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+            <div class="w-2 h-10 bg-blue-500 rounded-full shadow-[0_0_10px_#3b82f6]"></div>
             <div>
-                <p class="text-sm font-medium text-gray-500">سرعة الـ Recommendation</p>
-                <h4 class="text-xl font-bold text-gray-900 dark:text-white">120ms</h4>
+                <p class="text-xs text-gray-500 uppercase font-bold">API Latency</p>
+                <h4 class="font-bold text-gray-800 dark:text-white text-sm">45 ms <small
+                        class="text-green-500">Fast</small></h4>
             </div>
         </div>
-
-        <div
-            class="p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center space-x-4 space-x-reverse">
-            <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
-                    </path>
-                </svg>
-            </div>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+            <div class="w-2 h-10 bg-orange-500 rounded-full shadow-[0_0_10px_#f97316]"></div>
             <div>
-                <p class="text-sm font-medium text-gray-500">حجم ملفات التعلم</p>
-                <h4 class="text-xl font-bold text-gray-900 dark:text-white">بناء 1,240 ملف</h4>
+                <p class="text-xs text-gray-500 uppercase font-bold">GPU Usage</p>
+                <h4 class="font-bold text-gray-800 dark:text-white text-sm">24% Load</h4>
+            </div>
+        </div>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+            <div class="w-2 h-10 bg-purple-500 rounded-full shadow-[0_0_10px_#a855f7]"></div>
+            <div>
+                <p class="text-xs text-gray-500 uppercase font-bold">Database IO</p>
+                <h4 class="font-bold text-gray-800 dark:text-white text-sm">2.4k req/m</h4>
             </div>
         </div>
     </div>
 
-    <!-- هنا سيقوم Filament بحقن الودجات تلقائياً بين الهيدر والفوتر -->
+    <!-- 2. سحب الودجات (التركيز والنشاطات) هنا آلياً -->
 
-    <!-- قسم نصيحة للمشرف الأكاديمي (Insight Box) -->
-    <div class="mt-6 p-6 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded-r-xl">
-        <div class="flex items-center space-x-3 space-x-reverse">
-            <i class="heroicon-o-light-bulb w-6 h-6 text-blue-600"></i>
-            <h3 class="font-bold text-blue-900 dark:text-blue-100">تحليل ذكي للمنصة:</h3>
+    <!-- 3. نافذة التحكم واللوج الحركي (Terminal Console) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6">
+
+        <!-- التيرمينال الحركي -->
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-200">
+            <h5 class="font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center gap-2">
+                <i class="heroicon-o-command-line w-5 h-5"></i> سجل عمليات الذكاء الاصطناعي (Live Console)
+            </h5>
+            <div id="aiConsole" class="ai-terminal">
+                <div>[INFO] System Booted...</div>
+                <div>[INFO] Monitoring Emotion API signals...</div>
+                <div>[LOG] Fetching data for Teacher ID: 1...</div>
+            </div>
         </div>
-        <p class="mt-2 text-blue-800 dark:text-blue-200">
-            بناءً على البيانات الحالية، لوحظ زيادة في "مستوى الحيرة" لطلاب الصف الرابع في وحدة "القسمة". نقترح مراجعة
-            الفيديوهات المرتبطة بهذه الوحدة أو تبسيط مستوى الصعوبة.
-        </p>
+
+
     </div>
+
+    <!-- Script لمحاكاة حركة التيرمينال المبهرة -->
+    <script>
+        const logs = [
+            "[INFO] Neural Network successfully loaded weights...",
+            "[API] Recommendation request for User ID: #302",
+            "[AI] Confusion detected (Score: 78%) - Correcting path...",
+            "[SUCCESS] Student Learning Profile #1240 updated.",
+            "[SERVER] Health check PASSED",
+            "[DATA] Extraction behavioral features... COMPLETE",
+            "[INFO] Optimization cycle started..."
+        ];
+
+        let index = 0;
+        const consoleEl = document.getElementById('aiConsole');
+
+        setInterval(() => {
+            const entry = document.createElement('div');
+            entry.innerText = `> ${logs[index]}`;
+            consoleEl.appendChild(entry);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+            index = (index + 1) % logs.length;
+        }, 3000);
+    </script>
+
 </x-filament-panels::page>

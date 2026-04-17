@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\VideoInteractionResource\Pages;
 
 use App\Filament\Resources\VideoInteractionResource;
+use App\Filament\Widgets\InteractionStats;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,12 @@ class ListVideoInteractions extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            InteractionStats::class,
         ];
     }
 }

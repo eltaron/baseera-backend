@@ -3,43 +3,73 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VideoInteractionResource\Pages;
-use App\Filament\Resources\VideoInteractionResource\RelationManagers;
+use App\Filament\Widgets\InteractionStats;
 use App\Models\VideoInteraction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class VideoInteractionResource extends Resource
 {
     protected static ?string $model = VideoInteraction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-cursor-arrow-ripple';
+    protected static ?string $navigationGroup = 'تقارير وتحليلات الـ AI';
+    protected static ?string $label = 'تفاعل فيديو';
+    protected static ?string $pluralLabel = 'سجلات التفاعل';
+
+    // 1. صلاحيات المدرس: يرى التفاعلات المرتبطة بفيديوهاته هو فقط
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        if (auth()->user()->hasRole('Teacher')) {
+            return $query->whereHas('video', fn($q) => $q->where('teacher_id', auth()->id()));
+        }
+        return $query;
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('video_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('watch_time_seconds')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('replay_count')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('pause_frequency')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
+                Section::make('بيانات التفاعل الخام')
+                    ->description('مراجعة السلوك التقني للطالب أثناء المشاهدة.')
+                    ->schema([
+                        Select::make('user_id')
+                            ->label('اسم الطالب')
+                            ->relationship('user', 'name')
+                            ->disabled()
+                            ->required(),
+
+                        Select::make('video_id')
+                            ->label('الفيديو المستهدف')
+                            ->relationship('video', 'title')
+                            ->disabled()
+                            ->required(),
+
+                        TextInput::make('watch_time_seconds')
+                            ->label('وقت المشاهدة الفعلي')
+                            ->suffix('ثانية')
+                            ->numeric(),
+
+                        TextInput::make('replay_count')
+                            ->label('مرات الإعادة (Replay)')
+                            ->numeric()
+                        // ->icon('heroicon-m-arrow-path')
+                        ,
+
+                        TextInput::make('pause_frequency')
+                            ->label('مرات التوقف (Pause)')
+                            ->numeric()
+                        // ->icon('heroicon-m-pause-circle')
+                        ,
+                    ])->columns(2),
             ]);
     }
 
@@ -47,47 +77,62 @@ class VideoInteractionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('الطالب')
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('video_id')
-                    ->numeric()
-                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('video.title')
+                    ->label('الدرس')
+                    ->limit(25),
+
+                // عرض وقت المشاهدة بشكل دقيق
                 Tables\Columns\TextColumn::make('watch_time_seconds')
-                    ->numeric()
+                    ->label('المشاهدة')
+                    ->formatStateUsing(fn($state) => floor($state / 60) . ":" . ($state % 60) . " د")
                     ->sortable(),
-                Tables\Columns\TextColumn::make('replay_count')
-                    ->numeric()
-                    ->sortable(),
+
+                // مؤشر مرئي لمرات التوقف (إذا كان عالياً يظهر بلون تنبيهي)
                 Tables\Columns\TextColumn::make('pause_frequency')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('مرات التوقف')
+                    ->badge()
+                    ->color(fn($state) => $state > 5 ? 'danger' : 'gray')
+                    ->alignCenter(),
+
+                // مؤشر مرئي لمرات الإعادة (قد تدل على عدم الفهم أو الحيرة)
+                Tables\Columns\TextColumn::make('replay_count')
+                    ->label('مرات الإعادة')
+                    ->badge()
+                    ->color(fn($state) => $state > 3 ? 'warning' : 'success')
+                    ->alignCenter(),
+
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('وقت النشاط')
+                    ->dateTime('H:i | Y-m-d')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->since(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('video')
+                    ->relationship('video', 'title')
+                    ->label('حسب الفيديو'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
-    public static function getRelations(): array
+    public static function getWidgets(): array
     {
         return [
-            //
+            InteractionStats::class,
         ];
     }
 

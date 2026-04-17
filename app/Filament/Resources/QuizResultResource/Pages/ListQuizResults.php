@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\QuizResultResource\Pages;
 
 use App\Filament\Resources\QuizResultResource;
+use App\Filament\Widgets\QuizStats;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,12 @@ class ListQuizResults extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            QuizStats::class,
         ];
     }
 }

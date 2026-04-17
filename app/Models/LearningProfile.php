@@ -10,4 +10,9 @@ class LearningProfile extends Model
     use HasFactory;
     protected $fillable = ['user_id', 'current_level', 'strengths', 'weaknesses', 'preferred_learning_style'];
     protected $casts = ['strengths' => 'array', 'weaknesses' => 'array'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

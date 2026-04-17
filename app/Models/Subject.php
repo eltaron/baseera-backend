@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'teacher_id'];
     public function skills()
     {
         return $this->hasMany(Skill::class);
@@ -16,5 +16,9 @@ class Subject extends Model
     public function units()
     {
         return $this->hasMany(Unit::class);
+    }
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
     }
 }

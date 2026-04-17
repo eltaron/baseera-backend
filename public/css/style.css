@@ -587,23 +587,6 @@ body {
     z-index: 2;
 }
 
-/* ======== ربط المسارات بأسهم تفاعلية في الشاشات الكبيرة ======== */
-@media (min-width: 992px) {
-    /* وضع سهم يشير من الخطوة للتي تليها (من اليمين لليسار) */
-    .step-cards-wrapper > div:not(:last-child)::after {
-        content: "\f060"; /* سهم FontAwesome يسار */
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        position: absolute;
-        top: 50%;
-        left: -15px; /* يقع بين العمودين */
-        transform: translateY(-50%);
-        font-size: 1.5rem;
-        color: rgba(255, 255, 255, 0.15); /* لون السهم باهت جدا */
-        z-index: 0;
-    }
-}
-
 /* ================= الأسئلة الشائعة FAQ ================= */
 
 .faq-section {

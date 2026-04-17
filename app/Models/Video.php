@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
-    protected $fillable = ['lesson_id', 'title', 'video_url', 'skill', 'difficulty', 'duration_seconds'];
+    protected $fillable = ['lesson_id', 'title', 'video_url', 'skill', 'difficulty', 'duration_seconds', 'teacher_id'];
     public function questions()
     {
         return $this->hasMany(Question::class);
@@ -16,5 +16,9 @@ class Video extends Model
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
+    }
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
     }
 }

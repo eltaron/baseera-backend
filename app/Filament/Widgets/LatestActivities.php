@@ -6,17 +6,27 @@ use App\Models\VideoInteraction;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Illuminate\Database\Eloquent\Builder;
 
 class LatestActivities extends BaseWidget
 {
     protected static ?string $heading = 'آخر نشاطات الطلاب';
-    protected int | string | array $columnSpan = 'full'; // جعل الجدول يأخذ عرض الصفحة كاملاً
+    protected int | string | array $columnSpan = 'full';
 
     public function table(Table $table): Table
     {
+        $teacherId = auth()->id();
+        $isTeacher = auth()->user()->hasRole('Teacher');
+
         return $table
             ->query(
-                VideoInteraction::query()->latest()->limit(10) // جلب آخر 10 تفاعلات
+                VideoInteraction::query()
+                    ->when($isTeacher, function (Builder $query) use ($teacherId) {
+                        // فلترة الجدول للمُعلم
+                        return $query->whereHas('video', fn($v) => $v->where('teacher_id', $teacherId));
+                    })
+                    ->latest()
+                    ->limit(10)
             )
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
@@ -25,10 +35,10 @@ class LatestActivities extends BaseWidget
 
                 Tables\Columns\TextColumn::make('video.title')
                     ->label('الدرس المشاهَد')
-                    ->limit(30),
+                    ->limit(40),
 
                 Tables\Columns\BadgeColumn::make('video.difficulty')
-                    ->label('مستوى الصعوبة')
+                    ->label('المستوى')
                     ->colors([
                         'success' => 'beginner',
                         'warning' => 'intermediate',
@@ -36,13 +46,14 @@ class LatestActivities extends BaseWidget
                     ]),
 
                 Tables\Columns\TextColumn::make('watch_time_seconds')
-                    ->label('مدة المشاهدة (ثانية)')
+                    ->label('المدة')
+                    ->formatStateUsing(fn($state) => floor($state / 60) . ":" . ($state % 60) . " د")
                     ->alignCenter(),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('وقت النشاط')
-                    ->dateTime('Y-m-d H:i')
-                    ->since() // يظهرها بشكل "منذ 5 دقائق"
+                    ->dateTime('H:i')
+                    ->since()
                     ->color('gray'),
             ]);
     }

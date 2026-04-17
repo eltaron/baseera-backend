@@ -15,7 +15,7 @@ class BehavioralAnalysisPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_behavioral::analysis');
+        return $user->can('view_any_child::a::i::analytics');
     }
 
     /**
@@ -23,7 +23,7 @@ class BehavioralAnalysisPolicy
      */
     public function view(User $user, BehavioralAnalysis $behavioralAnalysis): bool
     {
-        return $user->can('view_behavioral::analysis');
+        return $user->can('view_child::a::i::analytics');
     }
 
     /**
@@ -31,7 +31,7 @@ class BehavioralAnalysisPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_behavioral::analysis');
+        return $user->can('{{ Create }}');
     }
 
     /**
@@ -39,7 +39,7 @@ class BehavioralAnalysisPolicy
      */
     public function update(User $user, BehavioralAnalysis $behavioralAnalysis): bool
     {
-        return $user->can('update_behavioral::analysis');
+        return $user->can('{{ Update }}');
     }
 
     /**
@@ -47,7 +47,7 @@ class BehavioralAnalysisPolicy
      */
     public function delete(User $user, BehavioralAnalysis $behavioralAnalysis): bool
     {
-        return $user->can('delete_behavioral::analysis');
+        return $user->can('{{ Delete }}');
     }
 
     /**
@@ -55,7 +55,7 @@ class BehavioralAnalysisPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_behavioral::analysis');
+        return $user->can('{{ DeleteAny }}');
     }
 
     /**
@@ -63,7 +63,7 @@ class BehavioralAnalysisPolicy
      */
     public function forceDelete(User $user, BehavioralAnalysis $behavioralAnalysis): bool
     {
-        return $user->can('force_delete_behavioral::analysis');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,7 +71,7 @@ class BehavioralAnalysisPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_behavioral::analysis');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -79,7 +79,7 @@ class BehavioralAnalysisPolicy
      */
     public function restore(User $user, BehavioralAnalysis $behavioralAnalysis): bool
     {
-        return $user->can('restore_behavioral::analysis');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class BehavioralAnalysisPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_behavioral::analysis');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class BehavioralAnalysisPolicy
      */
     public function replicate(User $user, BehavioralAnalysis $behavioralAnalysis): bool
     {
-        return $user->can('replicate_behavioral::analysis');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class BehavioralAnalysisPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_behavioral::analysis');
+        return $user->can('{{ Reorder }}');
     }
 }

@@ -13,33 +13,53 @@ use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 class AIMetrics extends Page
 {
     use HasPageShield;
-    // الأيقونة في القائمة الجانبية (أيقونة رقاقة إلكترونية)
+
     protected static ?string $navigationIcon = 'heroicon-o-cpu-chip';
-
-    // المجموعة التي تنتمي لها في القائمة
     protected static ?string $navigationGroup = 'تحليلات الذكاء الاصطناعي';
-
-    // عنوان الصفحة
     protected static ?string $title = 'غرفة عمليات بصيرة AI';
-
-    // مسار ملف الواجهة (الفرونت)
     protected static string $view = 'filament.pages.a-i-metrics';
 
+    // ربط الودجات الأساسية بالصفحة
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            StatsOverview::class,
+        ];
+    }
 
+    protected function getFooterWidgets(): array
+    {
+        return [
+            InteractionsChart::class,
+            LatestActivities::class,
+        ];
+    }
 
-    // إضافة زر "تحديث البيانات" في أعلى الصفحة بشكل احترافي
+    // عمليات التحكم في النظام
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('refreshAI')
-                ->label('تحديث خوارزميات التوصية')
-                ->icon('heroicon-m-arrow-path')
-                ->color('warning')
+            Action::make('generateReport')
+                ->label('توليد تقرير أداء ذكي')
+                ->icon('heroicon-m-document-chart-bar')
+                ->color('info')
+                ->requiresConfirmation()
+                ->action(fn() => Notification::make()
+                    ->title('جاري استخراج تقرير الأداء الـ AI...')
+                    ->info()
+                    ->send()),
+
+            Action::make('retrainModel')
+                ->label('إعادة معايرة خوارزمية السلوك')
+                ->icon('heroicon-m-command-line')
+                ->color('danger')
+                ->requiresConfirmation()
+                ->modalHeading('تنبيه أمان!')
+                ->modalDescription('هذا الإجراء سيقوم بإعادة تحليل كافة سلوكيات الطلاب الماضية لتحديث دقة الـ Learning Profiles. هل تريد الاستمرار؟')
                 ->action(function () {
-                    // هنا يمكن وضع كود لتشغيل سكريبت بايثون أو تحديث الداتا
                     Notification::make()
-                        ->title('تم تحديث البيانات بنجاح')
-                        ->success()
+                        ->title('بدأت عملية إعادة التدريب (Simulation Mode)')
+                        ->warning()
                         ->send();
                 }),
         ];
