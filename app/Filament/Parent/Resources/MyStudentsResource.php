@@ -73,7 +73,9 @@ class MyStudentsResource extends Resource implements HasShieldPermissions // ت�
                             Placeholder::make('child_name')
                                 ->label('اسم الابن / الابنة')
                                 ->content(fn($record): string => $record->name),
-
+                            Placeholder::make('child_email')
+                                ->label('البريد الإلكتروني')
+                                ->content(fn($record): string => $record->email),
                             Placeholder::make('grade')
                                 ->label('الصف الدراسي')
                                 ->content(fn($record): string => match ($record->grade_level) {

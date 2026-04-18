@@ -85,21 +85,27 @@ class AuthController extends Controller
             'name'     => $request->parent_name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
-            'role'     => 'parent',
+            'role'     => 'parent', // حقل الدور في الداتابيز
         ]);
 
-        // ب- إنشاء حساب الطالب وربطه بولي أمره
-        $studentEmail = 'kid_' . time() . '@baseera.ai'; // توليد إيميل افتراضي للطالب
+        // ب- إسناد رتبة "parent" لولي الأمر (عبر Spatie/Filament Shield)
+        $parent->assignRole('parent'); // <--- هذا السطر يفعل الصلاحيات له
+
+        // جـ- إنشاء حساب الطالب وربطه بولي أمره
+        $studentEmail = 'kid_' . time() . '@baseera.ai';
         $student = User::create([
             'name'        => $request->child_name,
             'email'       => $studentEmail,
-            'password'    => Hash::make($request->password), // لسهولة البدء نضع نفس الباسورد
+            'password'    => Hash::make($request->password), // نفس الباسورد لسهولة البدء
             'role'        => 'student',
             'parent_id'   => $parent->id,
             'grade_level' => $request->grade,
         ]);
 
-        // جـ- إنشاء ملف تعلم فارغ للذكاء الاصطناعي (Building the AI Brain)
+        // د- إسناد رتبة "student" للطالب (اختياري للأمان)
+        // $student->assignRole('student');
+
+        // هـ- إنشاء ملف تعلم فارغ للذكاء الاصطناعي (Building the AI Brain)
         LearningProfile::create([
             'user_id'       => $student->id,
             'current_level' => 'beginner',
@@ -107,7 +113,7 @@ class AuthController extends Controller
             'weaknesses'    => [],
         ]);
 
-        // د- تجهيز سجلات التقدم لجميع المواد (عربي، انجليزي، ماث)
+        // و- تجهيز سجلات التقدم لجميع المواد (عربي، انجليزي، ماث)
         $subjects = Subject::all();
         foreach ($subjects as $subject) {
             StudentProgress::create([
@@ -117,10 +123,18 @@ class AuthController extends Controller
             ]);
         }
 
-        // تسجيل دخول الأب تلقائياً بعد التسجيل
+        // تسجيل دخول الأب تلقائياً
         Auth::login($parent);
 
-        return redirect()->to('/parent')->with('success', 'مرحباً بك في عائلة بصيرة! تم إنشاء حسابك وحساب ' . $student->name . ' بنجاح.');
+        /**
+         * تجهيز الرسالة المفصلة لولي الأمر
+         * تحتوي على بيانات دخول الطفل
+         */
+        $successMessage = "مرحباً بك في عائلة بصيرة! تم إنشاء حسابك بنجاح. بيانات دخول ابنك " . $student->name . " هي: " .
+            " (البريد: " . $studentEmail . ") " .
+            " (كلمة المرور: هي نفس كلمتك التي اخترتها). ";
+
+        return redirect()->to('/parent')->with('success', $successMessage);
     }
 
     /**

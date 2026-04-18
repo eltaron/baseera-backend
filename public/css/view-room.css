@@ -278,3 +278,122 @@ body.student-body {
     border-radius: 50%;
     border: 2px solid var(--orange);
 }
+/* تصميم السينما المظلمة للهوية البصرية */
+header.navbar-custom,
+footer.modern-footer {
+    display: none !important;
+}
+
+body {
+    padding-top: 0 !important;
+    background-color: #030d1a !important;
+    overflow-x: hidden;
+}
+
+/* زخرفة الخلفية: شبكة تقنية خافتة */
+.tech-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+        circle at 50% 50%,
+        #0b1e33 0%,
+        #030d1a 100%
+    );
+    z-index: -1;
+}
+
+.tech-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 180, 216, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 180, 216, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+}
+
+/* تخصيص الهيدر العلوي */
+.top-view-header {
+    background: rgba(11, 58, 104, 0.4);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 75px;
+}
+
+/* الإطار المضيء للمشغل (The Glow) */
+.video-glow-frame {
+    position: relative;
+    padding: 8px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 123, 0, 0.3),
+        rgba(0, 180, 216, 0.3)
+    );
+    border-radius: 28px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/* تصميم لوحة المراقبة الجانبية HUD */
+.hud-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    backdrop-filter: blur(15px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-label-neon {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--color-lightblue);
+    text-transform: uppercase;
+    border: 1px solid var(--color-lightblue);
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.pulse-ai {
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #10b981;
+    animation: ai-pulse 2s infinite;
+}
+
+@keyframes ai-pulse {
+    0% {
+        transform: scale(0.9);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+.finish-lesson-btn {
+    background: linear-gradient(135deg, #ff7b00 0%, #ff4d00 100%);
+    border: none;
+    border-radius: 20px;
+    transition: 0.4s;
+    overflow: hidden;
+    position: relative;
+}
+
+.finish-lesson-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 77, 0, 0.4);
+}
